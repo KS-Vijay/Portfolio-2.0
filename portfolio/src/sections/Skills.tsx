@@ -3,20 +3,18 @@ import { motion, useInView } from 'framer-motion'
 import { Icon } from '@iconify/react'
 
 const techStack = [
-  { name: 'React',       icon: 'logos:react',          level: 95 },
-  { name: 'TypeScript',  icon: 'logos:typescript-icon', level: 90 },
-  { name: 'Next.js',     icon: 'logos:nextjs-icon',     level: 88 },
-  { name: 'Node.js',     icon: 'logos:nodejs-icon',     level: 85 },
-  { name: 'Tailwind',    icon: 'logos:tailwindcss-icon',level: 92 },
-  { name: 'MongoDB',     icon: 'logos:mongodb-icon',    level: 80 },
-  { name: 'PostgreSQL',  icon: 'logos:postgresql',      level: 78 },
-  { name: 'Three.js',    icon: 'logos:threejs',         level: 65 },
+  { name: 'Python',           icon: 'logos:python' },
+  { name: 'Java',             icon: 'logos:java' },
+  { name: 'JavaScript',       icon: 'logos:javascript' },
+  { name: 'C++',              icon: 'logos:c-plusplus' },
+  { name: 'Machine Learning', icon: 'carbon:machine-learning-model' },
+  { name: 'TensorFlow',       icon: 'logos:tensorflow' },
+  { name: 'PyTorch',          icon: 'logos:pytorch-icon' },
 ]
 
 const marqueeItems = [
-  'React', 'TypeScript', 'Next.js', 'Node.js', 'GraphQL', 'Tailwind',
-  'Framer Motion', 'Three.js', 'MongoDB', 'PostgreSQL', 'Docker', 'Figma',
-  'WebGL', 'Redis', 'AWS', 'Vite', 'Prisma', 'GSAP',
+  'Python', 'Machine Learning', 'Deep Learning', 'Java', 'TensorFlow', 'PyTorch',
+  'Data Science', 'Docker', 'AWS', 'Reinforcement Learning', 'Cloud Computing'
 ]
 
 export default function Skills() {
@@ -24,7 +22,7 @@ export default function Skills() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section id="skills" ref={ref} className="py-40 overflow-hidden" style={{ background: 'var(--bg-2)' }}>
+    <section id="skills" ref={ref} className="py-40 overflow-hidden" style={{ background: 'var(--bg-3)', backgroundColor: '#050505' }}>
       <div className="px-6 md:px-20 max-w-7xl mx-auto">
 
         <motion.span initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}
@@ -43,33 +41,26 @@ export default function Skills() {
         {/* Bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
 
-          {/* Large: Proficiency bars */}
+          {/* Large: Core Skills chips without percentages */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="md:col-span-2 p-8 border rounded-sm"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
             <h3 className="font-mono text-xs tracking-widest mb-8" style={{ color: 'var(--fg-muted)' }}>
-              PROFICIENCY
+              CORE ARSENAL
             </h3>
-            <div className="space-y-5">
-              {techStack.map(({ name, icon, level }, i) => (
-                <div key={name}>
-                  <div className="flex justify-between mb-1.5">
-                    <span className="flex items-center gap-2 font-body text-sm" style={{ color: 'var(--fg)' }}>
-                      <Icon icon={icon} width={16} />
-                      {name}
-                    </span>
-                    <span className="font-mono text-xs" style={{ color: 'var(--fg-muted)' }}>{level}%</span>
-                  </div>
-                  <div className="h-px w-full" style={{ background: 'var(--border)' }}>
-                    <motion.div className="h-full" style={{ background: 'var(--accent)' }}
-                      initial={{ width: 0 }}
-                      animate={isInView ? { width: `${level}%` } : { width: 0 }}
-                      transition={{ delay: 0.4 + i * 0.07, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    />
-                  </div>
-                </div>
+            <div className="flex flex-wrap gap-4">
+              {techStack.map(({ name, icon }, i) => (
+                <motion.div key={name}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.4 + i * 0.05, duration: 0.5 }}
+                  className="flex items-center gap-3 px-5 py-3 border rounded-sm font-body text-sm"
+                  style={{ borderColor: 'var(--border)', color: 'var(--fg)', background: 'var(--bg)' }}>
+                  <Icon icon={icon} width={20} className="text-white" />
+                  {name}
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -83,7 +74,7 @@ export default function Skills() {
             <h3 className="font-mono text-xs tracking-widest mb-4" style={{ color: 'var(--fg-muted)' }}>
               CURRENTLY LEARNING
             </h3>
-            <TypewriterCycle items={['Rust', 'WebGPU', 'Three.js', 'Web Audio API', 'Solidity']} />
+            <TypewriterCycle items={['Reinforcement Learning', 'Cloud Computing', 'Software Testing']} />
             <div className="mt-6 font-body text-xs" style={{ color: 'var(--fg-muted)' }}>
               Always pushing the boundary.
             </div>
@@ -97,7 +88,7 @@ export default function Skills() {
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
             <span className="block font-display text-5xl font-bold mb-4" style={{ color: 'var(--accent)' }}>∞</span>
             <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--fg-2)' }}>
-              "Code is the closest thing we have to a superpower."
+              "Machine intelligence is the last invention that humanity will ever need to make."
             </p>
           </motion.div>
 
@@ -111,7 +102,7 @@ export default function Skills() {
               TOOLS & ENVIRONMENT
             </h3>
             <div className="flex flex-wrap gap-3">
-              {['VS Code', 'Figma', 'Git', 'Docker', 'Postman', 'Linear', 'Vercel', 'AWS'].map((t) => (
+              {['Jupyter', 'Git', 'Docker', 'AWS', 'Linux', 'SQL', 'Postman', 'FastAPI'].map((t) => (
                 <span key={t} className="px-3 py-1.5 border font-mono text-xs"
                   style={{ borderColor: 'var(--border)', color: 'var(--fg-2)', borderRadius: '2px' }}>
                   {t}
@@ -123,9 +114,9 @@ export default function Skills() {
       </div>
 
       {/* Marquee strip */}
-      <div className="relative overflow-hidden py-6 border-y" style={{ borderColor: 'var(--border)' }}>
+      <div className="relative overflow-hidden py-6 border-y" style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}>
         <motion.div className="flex whitespace-nowrap" animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}>
+          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}>
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span key={i} className="flex items-center gap-6 mr-6 font-display text-2xl font-bold"
               style={{ color: i % 4 === 0 ? 'var(--accent)' : 'var(--fg-muted)' }}>
@@ -145,7 +136,7 @@ function TypewriterCycle({ items }: { items: string[] }) {
 
   useEffect(() => {
     const target = items[index]
-    const speed = deleting ? 40 : 80
+    const speed = deleting ? 30 : 60
 
     const timer = setTimeout(() => {
       if (!deleting && displayed === target) {
@@ -162,7 +153,7 @@ function TypewriterCycle({ items }: { items: string[] }) {
   }, [displayed, deleting, index, items])
 
   return (
-    <span className="font-display text-3xl font-bold" style={{ color: 'var(--fg)' }}>
+    <span className="font-display text-2xl md:text-3xl font-bold" style={{ color: 'var(--fg)' }}>
       {displayed}<span className="animate-blink" style={{ color: 'var(--accent)' }}>_</span>
     </span>
   )
