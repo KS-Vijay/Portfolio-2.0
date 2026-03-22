@@ -370,6 +370,14 @@ export default function StickmanFight() {
       // ── RENDER ROOT ──
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.save();
+
+      // Mobile Responsive Scaling Logic
+      const sf = window.innerWidth < 768 ? 0.55 : 1.0;
+      if (sf !== 1.0) {
+         ctx.translate(canvas.width/2, GROUND_Y);
+         ctx.scale(sf, sf);
+         ctx.translate(-canvas.width/2, -GROUND_Y);
+      }
       
       // Shake
       shake.x = (Math.random() - 0.5) * shake.intensity * 2;

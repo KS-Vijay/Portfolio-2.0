@@ -37,7 +37,7 @@ export default function About() {
               transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
               className="font-display font-bold text-[5vw] leading-tight mb-8"
               style={{ color: 'var(--fg)' }}>
-              Aspiring ML Engineer &<br/>
+              Aspiring ML Engineer &<br />
               <span style={{ color: 'var(--accent)' }}>Builder</span>
             </motion.h2>
           </div>
@@ -70,7 +70,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.6 }}
             className="flex gap-6 relative z-10">
-            <a href="https://linkedin.com/in/vijay" target="_blank" rel="noreferrer"
+            <a href="https://linkedin.com/in/ks-vijay" target="_blank" rel="noreferrer"
               {...linkCursor}
               className="p-4 border rounded-full hover:bg-white hover:text-black transition-all"
               style={{ borderColor: 'var(--border)', color: 'var(--fg)' }}>
@@ -82,7 +82,7 @@ export default function About() {
               style={{ borderColor: 'var(--border)', color: 'var(--fg)' }}>
               <Icon icon="mdi:github" width={24} />
             </a>
-            <a href="https://instagram.com/vijay" target="_blank" rel="noreferrer"
+            <a href="https://instagram.com/_._ksvj_._" target="_blank" rel="noreferrer"
               {...linkCursor}
               className="p-4 border rounded-full hover:bg-white hover:text-black transition-all"
               style={{ borderColor: 'var(--border)', color: 'var(--fg)' }}>
@@ -99,7 +99,7 @@ export default function About() {
 
           <motion.div style={{ y: imgY, borderColor: 'var(--border)' }}
             className="relative overflow-hidden rounded-sm border group/img cursor-none">
-            
+
             <img src="/images/p3.png" alt="Vijay Profile"
               className="w-full object-cover aspect-[4/5] grayscale transition-opacity duration-700 absolute inset-0 group-hover/img:opacity-0"
             />
@@ -112,17 +112,17 @@ export default function About() {
               style={{ background: 'linear-gradient(to top, color-mix(in srgb, var(--bg) 80%, transparent) 0%, transparent 40%)' }} />
 
             {/* Quirky Crown correctly positioned on head */}
-            <motion.svg 
-              viewBox="0 0 100 100" 
+            <motion.svg
+              viewBox="0 0 100 100"
               className="absolute top-[3%] left-[50%] w-[35%] h-auto -translate-x-1/2 -rotate-12 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] opacity-90 group-hover/img:translate-y-[-10px] group-hover/img:rotate-12 group-hover/img:scale-110 transition-transform duration-500 ease-out pointer-events-none z-30"
               fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
             >
-              <motion.path 
+              <motion.path
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
-                d="M 10 90 L 20 20 L 40 60 L 60 10 L 80 60 L 95 25 L 90 90 Z" 
+                d="M 10 90 L 20 20 L 40 60 L 60 10 L 80 60 L 95 25 L 90 90 Z"
               />
             </motion.svg>
           </motion.div>

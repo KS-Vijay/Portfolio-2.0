@@ -10,6 +10,9 @@ const techStack = [
   { name: 'Machine Learning', icon: 'carbon:machine-learning-model' },
   { name: 'TensorFlow',       icon: 'logos:tensorflow' },
   { name: 'PyTorch',          icon: 'logos:pytorch-icon' },
+  { name: 'Scikit-Learn',     icon: 'logos:scikit-learn' },
+  { name: 'Pandas',           icon: 'simple-icons:pandas' },
+  { name: 'NumPy',            icon: 'logos:numpy' },
 ]
 
 const marqueeItems = [
@@ -38,14 +41,14 @@ export default function Skills() {
           </motion.h2>
         </div>
 
-        {/* Bento grid */}
+        {/* Bento grid with hover effects */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
 
-          {/* Large: Core Skills chips without percentages */}
+          {/* Large: Core Skills chips */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="md:col-span-2 p-8 border rounded-sm"
+            className="md:col-span-2 p-8 border rounded-sm group hover:border-[var(--accent)] transition-colors duration-500"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
             <h3 className="font-mono text-xs tracking-widest mb-8" style={{ color: 'var(--fg-muted)' }}>
               CORE ARSENAL
@@ -56,9 +59,9 @@ export default function Skills() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.4 + i * 0.05, duration: 0.5 }}
-                  className="flex items-center gap-3 px-5 py-3 border rounded-sm font-body text-sm"
+                  className="flex items-center gap-3 px-5 py-3 border rounded-sm font-body text-sm hover:-translate-y-1 hover:border-[var(--accent)] transition-all cursor-default"
                   style={{ borderColor: 'var(--border)', color: 'var(--fg)', background: 'var(--bg)' }}>
-                  <Icon icon={icon} width={20} className="text-white" />
+                  <Icon icon={icon} width={20} className="text-white drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]" />
                   {name}
                 </motion.div>
               ))}
@@ -69,7 +72,7 @@ export default function Skills() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.35, duration: 0.6 }}
-            className="p-8 border rounded-sm flex flex-col justify-between"
+            className="p-8 border rounded-sm flex flex-col justify-between group hover:border-[var(--accent)] transition-colors duration-500"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
             <h3 className="font-mono text-xs tracking-widest mb-4" style={{ color: 'var(--fg-muted)' }}>
               CURRENTLY LEARNING
@@ -84,9 +87,9 @@ export default function Skills() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="p-8 border rounded-sm"
+            className="p-8 border rounded-sm group hover:border-[var(--accent)] transition-colors duration-500"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
-            <span className="block font-display text-5xl font-bold mb-4" style={{ color: 'var(--accent)' }}>∞</span>
+            <span className="block font-display text-5xl font-bold mb-4 transition-transform group-hover:scale-110 origin-left" style={{ color: 'var(--accent)' }}>∞</span>
             <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--fg-2)' }}>
               "Machine intelligence is the last invention that humanity will ever need to make."
             </p>
@@ -96,14 +99,14 @@ export default function Skills() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="md:col-span-2 p-8 border rounded-sm"
+            className="md:col-span-2 p-8 border rounded-sm group hover:border-[var(--accent)] transition-colors duration-500"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
             <h3 className="font-mono text-xs tracking-widest mb-6" style={{ color: 'var(--fg-muted)' }}>
               TOOLS & ENVIRONMENT
             </h3>
             <div className="flex flex-wrap gap-3">
-              {['Jupyter', 'Git', 'Docker', 'AWS', 'Linux', 'SQL', 'Postman', 'FastAPI'].map((t) => (
-                <span key={t} className="px-3 py-1.5 border font-mono text-xs"
+              {['Jupyter', 'Git', 'Docker', 'AWS', 'Linux', 'GCP', 'Postman', 'FastAPI'].map((t) => (
+                <span key={t} className="px-3 py-1.5 border font-mono text-xs hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors cursor-default"
                   style={{ borderColor: 'var(--border)', color: 'var(--fg-2)', borderRadius: '2px' }}>
                   {t}
                 </span>
@@ -113,17 +116,20 @@ export default function Skills() {
         </div>
       </div>
 
-      {/* Marquee strip */}
-      <div className="relative overflow-hidden py-6 border-y" style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}>
-        <motion.div className="flex whitespace-nowrap" animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}>
+      {/* Standard Marquee strip */}
+      <div className="relative overflow-hidden py-6 border-y flex" style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}>
+         <motion.div 
+           className="flex whitespace-nowrap w-max"
+           animate={{ x: ['0%', '-50%'] }}
+           transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+         >
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
-            <span key={i} className="flex items-center gap-6 mr-6 font-display text-2xl font-bold"
+            <span key={i} className="flex items-center gap-6 mr-6 font-display text-3xl font-bold leading-none"
               style={{ color: i % 4 === 0 ? 'var(--accent)' : 'var(--fg-muted)' }}>
               {item} <span style={{ color: 'var(--fg-muted)' }}>✦</span>
             </span>
           ))}
-        </motion.div>
+         </motion.div>
       </div>
     </section>
   )

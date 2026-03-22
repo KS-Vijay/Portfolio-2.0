@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import emailjs from 'emailjs-com'
@@ -14,32 +14,42 @@ export default function Contact() {
   const [copied, setCopied] = useState(false)
   const [sent, setSent] = useState(false)
   const { register, handleSubmit, formState: { isSubmitting } } = useForm()
-  
+
   const cursorOpts = useCursorHover('hover')
 
   const copyEmail = () => {
-    navigator.clipboard.writeText('vijayks@example.com')
+    navigator.clipboard.writeText('ksvijay2005@gmail.com')
     setCopied(true)
     setTimeout(() => setCopied(false), 2500)
   }
 
   const onSubmit = async (data: any) => {
-    await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data, 'YOUR_PUBLIC_KEY')
-    setSent(true)
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        data,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      setSent(true)
+    } catch (error) {
+      console.error('Failed to send email:', error)
+    }
   }
 
   const socials = [
-    { name: 'GitHub',   href: 'https://github.com/KS-Vijay', icon: 'mdi:github' },
-    { name: 'LinkedIn', href: 'https://linkedin.com/in/vijay', icon: 'mdi:linkedin' },
-    { name: 'Instagram',  href: 'https://instagram.com/vijay', icon: 'mdi:instagram' }
+    { name: 'GitHub', href: 'https://github.com/KS-Vijay', icon: 'mdi:github' },
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/ks-vijay', icon: 'mdi:linkedin' },
+    { name: 'Instagram', href: 'https://instagram.com/_._ksvj_._', icon: 'mdi:instagram' }
   ]
 
   return (
     <section id="contact" ref={ref}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-40 px-6">
+      <RainingCanvas />
       <StickmanFight />
       {/* Background is deliberately removed so the Stickman Fight animation can run behind it */}
-      
+
       {/* Ambient giant text */}
       <motion.div style={{ y: ambientY }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
@@ -83,7 +93,7 @@ export default function Contact() {
             background: copied ? 'var(--accent)' : 'transparent',
           }}>
           <span style={{ color: copied ? 'var(--bg)' : 'var(--fg)' }}>
-            {copied ? 'Copied ✓' : 'vijayks@example.com'}
+            {copied ? 'Copied ✓' : 'ksvijay2005@gmail.com'}
           </span>
         </motion.button>
 
@@ -111,8 +121,8 @@ export default function Contact() {
           className="text-left space-y-8 relative z-20 p-8 border" style={{ borderColor: 'var(--border)', background: 'var(--bg-card)' }}>
 
           {[
-            { name: 'name',    label: 'Name',    type: 'text'  },
-            { name: 'email',   label: 'Email',   type: 'email' },
+            { name: 'name', label: 'Name', type: 'text' },
+            { name: 'email', label: 'Email', type: 'email' },
           ].map(({ name, label, type }) => (
             <div key={name} className="relative group">
               <input {...register(name, { required: true })} type={type} placeholder=" "
@@ -153,4 +163,58 @@ export default function Contact() {
       </div>
     </section>
   )
+}
+
+function RainingCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  useEffect(() => {
+    const cvs = canvasRef.current; if (!cvs) return;
+    const ctx = cvs.getContext('2d'); if (!ctx) return;
+    
+    let w = cvs.width = window.innerWidth;
+    let h = cvs.height = window.innerHeight;
+    const cols = Math.floor(w / 20) + 1;
+    const ypos = Array(cols).fill(0);
+    
+    let animId: number;
+    let frameCount = 0;
+    
+    const draw = () => {
+      frameCount++;
+      // Control speed by skipping frames occasionally if needed, but 60fps is fine for Matrix
+      if (frameCount % 2 !== 0) {
+        ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
+        ctx.fillRect(0, 0, w, h);
+        
+        // Try getting actual CSS variable accent, fallback to purple
+        const rootStyles = getComputedStyle(document.body);
+        let accent = rootStyles.getPropertyValue('--accent').trim();
+        if (!accent) accent = '#a78bfa';
+        
+        ctx.fillStyle = accent; 
+        ctx.font = '14pt monospace';
+        
+        ypos.forEach((y, ind) => {
+          const text = String.fromCharCode(0x30A0 + Math.random() * 96); // Katakana
+          const x = ind * 20;
+          ctx.fillText(text, x, y);
+          if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
+          else ypos[ind] = y + 20;
+        })
+      }
+      animId = requestAnimationFrame(draw);
+    }
+    
+    animId = requestAnimationFrame(draw);
+    
+    const handleResize = () => {
+      w = cvs.width = window.innerWidth;
+      h = cvs.height = window.innerHeight;
+    }
+    window.addEventListener('resize', handleResize)
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', handleResize); }
+  }, [])
+  
+  return <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-20 pointer-events-none" />
 }

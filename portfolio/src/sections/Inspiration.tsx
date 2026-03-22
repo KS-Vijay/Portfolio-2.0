@@ -3,12 +3,12 @@ import { motion, useInView } from 'framer-motion'
 import { useCursorHover } from '@/hooks/useCursorHover'
 
 const legends = [
-  { name: 'Sundar Pichai', role: 'Visionary Leader', hue: '#c8ff00' },
-  { name: 'Nicholas Renotte', role: 'AI Educator', hue: '#ff6b35' },
-  { name: 'Thorfinn', role: 'True Warrior', hue: '#a78bfa' },
-  { name: 'Isaac Newton', role: 'Physicist', hue: '#4ade80' },
-  { name: 'Alexander the Great', role: 'Conqueror', hue: '#f43f5e' },
-  { name: 'Linus Torvalds', role: 'Creator of Linux', hue: '#38bdf8' }
+  { name: 'Sundar Pichai', role: 'Visionary Leader', hue: '#c8ff00', img: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Sundar_Pichai_%282023%29_cropped.jpg' },
+  { name: 'Nicholas Renotte', role: 'AI Educator', hue: '#ff6b35', img: 'https://github.com/nicknochnack.png' },
+  { name: 'Thorfinn', role: 'True Warrior', hue: '#a78bfa', img: 'https://i.pinimg.com/originals/34/22/2a/34222a8f0d41c9158729fe194a789268.jpg' },
+  { name: 'Isaac Newton', role: 'Physicist', hue: '#4ade80', img: 'https://upload.wikimedia.org/wikipedia/commons/3/39/GodfreyKneller-IsaacNewton-1689.jpg' },
+  { name: 'Alexander the Great', role: 'Conqueror', hue: '#f43f5e', img: 'https://i.pinimg.com/736x/f2/22/32/f222321df5c8b39fc3826b7117a208c0.jpg' },
+  { name: 'Linus Torvalds', role: 'Creator of Linux', hue: '#38bdf8', img: 'https://upload.wikimedia.org/wikipedia/commons/0/01/LinuxCon_Europe_Linus_Torvalds_03_%28cropped%29.jpg' }
 ]
 
 export default function Inspiration() {
@@ -16,7 +16,7 @@ export default function Inspiration() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const cursor = useCursorHover('view')
 
-  // Tripled for perfectly smooth seamless infinite scrolling
+  // Tripled array for mathematically precise infinite loop sizing
   const strip = [...legends, ...legends, ...legends]
 
   return (
@@ -35,10 +35,10 @@ export default function Inspiration() {
         </div>
       </div>
 
-      {/* Marquee Showcase */}
-      <div className="relative w-full flex overflow-hidden py-10" {...cursor}>
+      {/* Standard Marquee Showcase */}
+      <div className="relative w-full overflow-hidden py-10 flex" {...cursor}>
         <motion.div 
-          className="flex gap-8 px-4"
+          className="flex gap-8 px-4 w-max"
           animate={{ x: ['0%', '-33.333%'] }}
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
         >
@@ -46,19 +46,18 @@ export default function Inspiration() {
             <div key={i} className="relative shrink-0 w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-sm overflow-hidden group transition-transform duration-500 hover:scale-[1.02]"
               style={{ background: 'var(--bg-card)' }}>
               
-              {/* Fallback Abstract Gradient Box simulating image */}
+              {/* Fallback Abstract Gradient Box */}
               <div className="absolute inset-0 w-full h-full opacity-60 group-hover:opacity-100 transition-opacity duration-700"
                 style={{ 
                   background: `linear-gradient(135deg, color-mix(in srgb, ${legend.hue} 40%, black) 0%, #0a0a0a 100%)` 
                 }} 
               />
               
-              {/* Optional user-provided images could be loaded here if placed in public folder matching names */}
               <img 
-                src={`/images/${legend.name.split(' ')[0].toLowerCase()}.jpg`}
+                src={legend.img}
                 alt={legend.name}
                 className="absolute inset-0 w-full h-full object-cover grayscale mix-blend-overlay group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700"
-                onError={(e) => e.currentTarget.style.opacity = '0'}
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
               />
 
               <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end"

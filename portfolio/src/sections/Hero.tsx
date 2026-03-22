@@ -11,9 +11,9 @@ export default function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
 
   // Parallax transforms
-  const y        = useTransform(scrollYProgress, [0, 1], ['0%', '40%'])
-  const opacity  = useTransform(scrollYProgress, [0, 0.7], [1, 0])
-  const scale    = useTransform(scrollYProgress, [0, 1], [1, 1.05])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05])
 
   const cursor = useCursorHover()
 
@@ -71,7 +71,7 @@ export default function Hero() {
           transition={{ delay: 0.9, duration: 0.8 }}
           className="mt-8 font-body text-base md:text-lg tracking-[0.25em] uppercase"
           style={{ color: 'var(--fg-2)' }}>
-          Full-Stack Developer · UI Engineer · Creative Coder
+          ML Engineer · AI Engineer · Cloud Engineer
         </motion.p>
 
         {/* CTAs */}
@@ -116,11 +116,15 @@ export default function Hero() {
         initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.3, duration: 0.6 }}
         className="absolute left-8 bottom-10 flex flex-col gap-4 z-20 hidden md:flex">
-        {['GitHub', 'LinkedIn', 'Twitter'].map((s) => (
-          <a key={s} href="#" className="font-mono text-xs tracking-widest rotate-180"
+        {[
+          { name: 'GitHub', link: 'https://github.com/KS-Vijay' },
+          { name: 'LinkedIn', link: 'https://linkedin.com/in/ks-vijay' },
+          { name: 'Instagram', link: 'https://instagram.com/_._ksvj_._' }
+        ].map((s) => (
+          <a key={s.name} href={s.link} target="_blank" rel="noreferrer" className="font-mono text-xs tracking-widest rotate-180 transition-colors hover:text-[var(--accent)]"
             style={{ writingMode: 'vertical-rl', color: 'var(--fg-muted)' }}
             {...useCursorHover()}>
-            {s}
+            {s.name}
           </a>
         ))}
         <div className="w-px h-20 self-center" style={{ background: 'var(--fg-muted)' }} />
