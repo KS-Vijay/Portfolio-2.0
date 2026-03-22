@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import emailjs from 'emailjs-com'
 import { Icon } from '@iconify/react'
+import { useCursorHover } from '@/hooks/useCursorHover'
+import StickmanFight from '@/components/ui/StickmanFight'
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null)
@@ -12,9 +14,11 @@ export default function Contact() {
   const [copied, setCopied] = useState(false)
   const [sent, setSent] = useState(false)
   const { register, handleSubmit, formState: { isSubmitting } } = useForm()
+  
+  const cursorOpts = useCursorHover('hover')
 
   const copyEmail = () => {
-    navigator.clipboard.writeText('your@email.com')
+    navigator.clipboard.writeText('vijayks@example.com')
     setCopied(true)
     setTimeout(() => setCopied(false), 2500)
   }
@@ -25,20 +29,20 @@ export default function Contact() {
   }
 
   const socials = [
-    { name: 'GitHub',   href: '#', icon: 'mdi:github' },
-    { name: 'LinkedIn', href: '#', icon: 'mdi:linkedin' },
-    { name: 'Twitter',  href: '#', icon: 'mdi:twitter' },
-    { name: 'Dribbble', href: '#', icon: 'mdi:dribbble' },
+    { name: 'GitHub',   href: 'https://github.com/KS-Vijay', icon: 'mdi:github' },
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/vijay', icon: 'mdi:linkedin' },
+    { name: 'Instagram',  href: 'https://instagram.com/vijay', icon: 'mdi:instagram' }
   ]
 
   return (
     <section id="contact" ref={ref}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-40 px-6"
-      style={{ background: 'var(--bg)' }}>
-
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-40 px-6">
+      <StickmanFight />
+      {/* Background is deliberately removed so the Stickman Fight animation can run behind it */}
+      
       {/* Ambient giant text */}
       <motion.div style={{ y: ambientY }}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
         <span className="font-display text-[18vw] font-bold whitespace-nowrap"
           style={{ color: 'var(--fg)', opacity: 0.03 }}>
           Let's Talk
@@ -69,6 +73,7 @@ export default function Contact() {
 
         {/* Big email button */}
         <motion.button onClick={copyEmail}
+          {...cursorOpts}
           initial={{ opacity: 0, scale: 0.9 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 0.3, duration: 0.6 }}
           whileHover={{ scale: 1.03 }}
@@ -78,7 +83,7 @@ export default function Contact() {
             background: copied ? 'var(--accent)' : 'transparent',
           }}>
           <span style={{ color: copied ? 'var(--bg)' : 'var(--fg)' }}>
-            {copied ? 'Copied ✓' : 'your@email.com'}
+            {copied ? 'Copied ✓' : 'vijayks@example.com'}
           </span>
         </motion.button>
 
@@ -88,10 +93,11 @@ export default function Contact() {
           className="flex items-center justify-center gap-4 mb-20">
           {socials.map(({ name, href, icon }, i) => (
             <motion.a key={name} href={href} target="_blank"
+              {...cursorOpts}
               initial={{ opacity: 0, scale: 0 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.6 + i * 0.07, type: 'spring' }}
               whileHover={{ scale: 1.15, rotate: 8 }}
-              className="w-12 h-12 border flex items-center justify-center transition-colors relative z-20"
+              className="w-12 h-12 border flex items-center justify-center transition-colors relative z-20 hover:bg-white hover:text-black"
               style={{ borderColor: 'var(--border)', borderRadius: '2px', color: 'var(--fg-2)' }}>
               <Icon icon={icon} width={20} />
             </motion.a>
@@ -102,7 +108,7 @@ export default function Contact() {
         <motion.form onSubmit={handleSubmit(onSubmit)}
           initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.7, duration: 0.7 }}
-          className="text-left space-y-8 relative z-20">
+          className="text-left space-y-8 relative z-20 p-8 border" style={{ borderColor: 'var(--border)', background: 'var(--bg-card)' }}>
 
           {[
             { name: 'name',    label: 'Name',    type: 'text'  },
@@ -138,7 +144,8 @@ export default function Contact() {
           </div>
 
           <button type="submit" disabled={isSubmitting || sent}
-            className="w-full py-4 font-display font-bold text-base transition-all hover:opacity-90 disabled:opacity-50"
+            {...cursorOpts}
+            className="w-full py-4 font-display font-bold text-base transition-all hover:opacity-90 disabled:opacity-50 mt-4"
             style={{ background: sent ? '#22c55e' : 'var(--accent)', color: 'var(--bg)', borderRadius: '2px' }}>
             {sent ? 'Sent! I\'ll be in touch ✓' : isSubmitting ? 'Sending...' : 'Send Message →'}
           </button>

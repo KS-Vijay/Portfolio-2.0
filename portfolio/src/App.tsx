@@ -12,6 +12,7 @@ import Skills from './sections/Skills'
 import Projects from './sections/Projects'
 import Inspiration from './sections/Inspiration'
 import Certificates from './sections/Certificates'
+import Achievements from './sections/Achievements'
 import ImageReveal from './sections/ImageReveal'
 import Contact from './sections/Contact'
 import Footer from './components/layout/Footer'
@@ -47,6 +48,7 @@ export default function App() {
               <Projects />
               <Inspiration />
               <Certificates />
+              <Achievements />
               <ImageReveal />
               <Contact />
             </main>

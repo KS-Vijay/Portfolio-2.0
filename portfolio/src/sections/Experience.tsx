@@ -1,13 +1,16 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 
-const experiences = [
+const training = [
   {
     year: "Jun’ 25 - Jul’ 25", 
     role: "MERN Stack with GenAI", 
     company: "The Angaar Batch & W3Grads", 
     description: "Built and deployed full-stack web applications using the MERN stack. Integrated Generative AI models into workflows, enhancing automation and reducing manual processing effort by ~40%."
-  },
+  }
+]
+
+const education = [
   {
     year: "2023 - Present", 
     role: "BTech CSE - 8 CGPA", 
@@ -36,13 +39,46 @@ export default function Experience() {
   // Line grows from 0% to 100% as you scroll down
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
+  const renderItem = (exp: any, i: number) => (
+    <motion.div key={i}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="py-12 group flex flex-col md:flex-row gap-6 md:gap-24 relative pl-8 md:pl-0">
+      
+      {/* Timeline dot */}
+      <div className="absolute left-[3px] md:left-[25%] top-[60px] w-4 h-4 rounded-full border-2 transform -translate-x-1/2 transition-colors duration-500 group-hover:bg-[#c8ff00]" 
+        style={{ borderColor: 'var(--accent)', background: 'var(--bg-2)' }} />
+
+      <div className="md:w-[25%] shrink-0 pt-2 flex md:justify-end pr-8">
+        <span className="font-mono text-sm tracking-wide group-hover:text-[var(--accent)] transition-colors"
+          style={{ color: 'var(--fg-muted)' }}>
+          {exp.year}
+        </span>
+      </div>
+      
+      <div className="flex-1 p-8 border rounded-sm transition-all duration-500 group-hover:border-[var(--accent)]" style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
+        <h3 className="font-display text-2xl font-bold mb-2 transition-colors" style={{ color: 'var(--fg)' }}>
+          {exp.role}
+        </h3>
+        <h4 className="font-body text-base mb-4 tracking-wide font-medium" style={{ color: 'var(--accent)' }}>
+          {exp.company}
+        </h4>
+        <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--fg-2)' }}>
+          {exp.description}
+        </p>
+      </div>
+    </motion.div>
+  )
+
   return (
     <section id="experience" ref={containerRef} className="py-40 relative z-10 overflow-hidden" style={{ background: 'var(--bg-2)' }}>
-      <div className="px-6 md:px-20 max-w-5xl mx-auto">
+      <div className="px-6 md:px-20 max-w-7xl mx-auto">
         
         <motion.span initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}
           className="font-mono text-xs tracking-widest mb-4 block" style={{ color: 'var(--accent)' }}>
-          02.5 / EXPERIENCE
+          02.5 / TIMELINE
         </motion.span>
         
         <div className="overflow-hidden mb-20">
@@ -54,48 +90,28 @@ export default function Experience() {
         </div>
 
         {/* Timeline Container */}
-        <div className="relative flex flex-col pl-8 md:pl-0">
+        <div className="relative flex flex-col">
           
           {/* Animated Line Marker (Mr Pops Style) */}
-          <div className="absolute left-[8px] md:left-[25%] top-4 bottom-10 w-[2px] overflow-hidden" style={{ background: 'var(--border)' }}>
+          <div className="absolute left-[11px] md:left-[25%] top-4 bottom-10 w-[2px] overflow-hidden" style={{ background: 'var(--border)' }}>
             <motion.div className="w-full origin-top" style={{ background: 'var(--accent)', height: lineHeight }} />
           </div>
 
-          {experiences.map((exp, i) => (
-            <motion.div key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="py-12 group flex flex-col md:flex-row gap-6 md:gap-24 relative">
-              
-              {/* Timeline dot */}
-              <div className="absolute left-[-29px] md:left-[clamp(24.5%,24.5vw,24.5%)] top-[56px] w-4 h-4 rounded-full border-2 transform -translate-x-1/2 bg-black transition-colors duration-500 group-hover:bg-[#c8ff00]" 
-                style={{ borderColor: 'var(--accent)' }} />
+          <motion.h3 
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            className="font-display text-3xl font-bold mb-4 mt-8 pl-12 md:pl-[min(25%+3rem)]" style={{ color: 'var(--fg)' }}>
+            Training
+          </motion.h3>
+          {training.map(renderItem)}
 
-              <div className="md:w-1/4 shrink-0 pt-2">
-                <span className="font-mono text-sm tracking-wide group-hover:text-[var(--accent)] transition-colors"
-                  style={{ color: 'var(--fg-muted)' }}>
-                  {exp.year}
-                </span>
-              </div>
-              
-              <div className="flex-1 p-8 border rounded-sm transition-all duration-500 group-hover:border-[var(--accent)]" style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
-                <h3 className="font-display text-2xl font-bold mb-2 transition-colors" style={{ color: 'var(--fg)' }}>
-                  {exp.role}
-                </h3>
-                <h4 className="font-body text-base mb-4 tracking-wide font-medium" style={{ color: 'var(--accent)' }}>
-                  {exp.company}
-                </h4>
-                <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--fg-2)' }}>
-                  {exp.description}
-                </p>
-              </div>
-              
-            </motion.div>
-          ))}
+          <motion.h3 
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            className="font-display text-3xl font-bold mb-4 mt-16 pl-12 md:pl-[min(25%+3rem)]" style={{ color: 'var(--fg)' }}>
+            Education
+          </motion.h3>
+          {education.map(renderItem)}
+
         </div>
-
       </div>
     </section>
   )
