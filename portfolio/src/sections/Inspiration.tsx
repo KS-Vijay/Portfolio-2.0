@@ -33,6 +33,12 @@ export default function Inspiration() {
             The Shoulders of Giants
           </motion.h2>
         </div>
+        
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="font-body text-sm md:text-base italic mt-6 max-w-2xl mx-auto" style={{ color: 'var(--fg-2)' }}>
+          "I do not seek a finish line, only the next horizon. The journey is about pushing past what is known and discovering what is possible."
+        </motion.p>
       </div>
 
       {/* Standard Marquee Showcase */}

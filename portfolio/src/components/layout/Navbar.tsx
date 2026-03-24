@@ -51,7 +51,7 @@ export default function Navbar() {
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-10">
             {links.map((link) => (
-              <NavLink key={link} href={`#${link.toLowerCase()}`}>{link}</NavLink>
+              <NavLink key={link} href={link === 'Home' ? '#hero' : `#${link.toLowerCase()}`}>{link}</NavLink>
             ))}
           </div>
 
@@ -98,7 +98,7 @@ export default function Navbar() {
           >
             {links.map((link, i) => (
               <motion.a
-                key={link} href={`#${link.toLowerCase()}`}
+                key={link} href={link === 'Home' ? '#hero' : `#${link.toLowerCase()}`}
                 onClick={() => setMenuOpen(false)}
                 initial={{ y: 60, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

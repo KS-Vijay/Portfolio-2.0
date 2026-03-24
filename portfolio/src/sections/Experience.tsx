@@ -31,6 +31,8 @@ const education = [
   }
 ]
 
+import AmbientShapes from '@/components/ui/AmbientShapes'
+
 export default function Experience() {
   const containerRef = useRef<HTMLElement>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.1 })
@@ -74,7 +76,8 @@ export default function Experience() {
 
   return (
     <section id="experience" ref={containerRef} className="py-40 relative z-10 overflow-hidden" style={{ background: 'var(--bg-2)' }}>
-      <div className="px-6 md:px-20 max-w-7xl mx-auto">
+      <AmbientShapes />
+      <div className="px-6 md:px-20 max-w-7xl mx-auto relative z-10">
         
         <motion.span initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}
           className="font-mono text-xs tracking-widest mb-4 block" style={{ color: 'var(--accent)' }}>

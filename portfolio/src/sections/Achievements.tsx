@@ -6,13 +6,16 @@ const achs = [
   { title: "Secured Top 70 in National Level Hackathon by SAP", date: "Aug’ 25", desc: "Recognized for innovative problem-solving and rapid development of a high-impact AI governance solution under intense pressure." }
 ]
 
+import AmbientShapes from '@/components/ui/AmbientShapes'
+
 export default function Achievements() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section id="achievements" ref={ref} className="py-24 border-t relative z-10" style={{ background: 'var(--bg)', borderColor: 'var(--border)' }}>
-      <div className="px-6 md:px-20 max-w-7xl mx-auto">
+    <section id="achievements" ref={ref} className="py-24 border-t relative z-10 overflow-hidden" style={{ background: 'var(--bg)', borderColor: 'var(--border)' }}>
+      <AmbientShapes />
+      <div className="px-6 md:px-20 max-w-7xl mx-auto relative z-10">
         
         <div className="flex flex-col md:flex-row gap-16 md:items-start">
           <div className="md:w-1/3">
@@ -23,7 +26,7 @@ export default function Achievements() {
             <div className="overflow-hidden mb-6">
               <motion.h2 initial={{ y: '100%' }} animate={isInView ? { y: '0%' } : {}}
                 transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-                className="font-display font-bold text-4xl md:text-[4vw] leading-tight" style={{ color: 'var(--fg)' }}>
+                className="font-display font-bold text-4xl md:text-[4vw] leading-tight pb-4" style={{ color: 'var(--fg)' }}>
                 Milestones &<br/>Achievements
               </motion.h2>
             </div>

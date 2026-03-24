@@ -47,7 +47,7 @@ export default function About() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="font-body text-base md:text-lg leading-relaxed mb-6"
             style={{ color: 'var(--fg-2)' }}>
-            Hi, I'm Vijay K S — an aspiring Machine Learning Engineer with a strong interest in space, technology, and building things that make an impact. I enjoy working on real-world problems using code, especially in the fields of AI and automation.
+            Hi, I'm <span className="font-display font-semibold text-xl md:text-2xl" style={{ color: 'var(--fg)' }}>Vijay<span style={{ color: 'var(--accent)' }}>.</span></span> — an aspiring Machine Learning Engineer with a strong interest in space, technology, and building things that make an impact. I enjoy working on real-world problems using code, especially in the fields of AI and automation.
           </motion.p>
 
           <motion.p

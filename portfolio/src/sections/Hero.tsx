@@ -19,7 +19,7 @@ export default function Hero() {
 
   return (
     <section id="hero" ref={ref}
-      className="relative h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-[100svh] pt-24 pb-12 md:pt-32 flex flex-col items-center justify-center overflow-hidden"
       style={{ background: 'var(--bg)' }}>
 
       {/* Three.js particle field background */}

@@ -22,6 +22,7 @@ const projects = [
     images: ['/images/eai1.webp', '/images/eai2.webp', '/images/eai3.webp', '/images/eai4.webp', '/images/eai5.webp', '/images/eai6.webp', '/images/eai7.webp'],
     live: null,
     github: 'https://github.com/KS-Vijay/Ethical-AI-Governance-Toolkit',
+    pypi: 'https://pypi.org/project/fairsight/',
     color: '#ff6b35',
   },
   {
@@ -29,12 +30,14 @@ const projects = [
     description: 'An Edge-based personal ultraviolet index (UVI) exposure and risk estimation app that helps users understand their daily sun exposure.',
     features: ['Location & Time Based UVI Tracking', 'Individual Exposure Risk Estimation', 'Personalized Sun-Protection Insights', 'Edge-based Processing'],
     tags: ['Dart', 'Flutter', 'AI/ML', 'Mobile SDK'],
-    images: ['https://lh6.googleusercontent.com/proxy/3YFc8ueOnNNzLQ2BSyCsuo-n_zJK-TE-U9b03SZRQzo-Kb-AyvZ_JnQTkbaue_k11HBzjVIfq4GzRswBNO1ZyK_FC7wMrKD0Cg'],
+    images: ['/images/px1.jpg', '/images/px2.jpg'],
     live: null,
     github: 'https://github.com/KS-Vijay/PhotonX',
     color: '#a78bfa',
   },
 ]
+
+import PaperPlanePath from '@/components/ui/PaperPlanePath'
 
 export default function Projects() {
   return (
@@ -45,12 +48,13 @@ export default function Projects() {
         </motion.span>
         <div className="overflow-hidden mt-4 mb-20">
           <motion.h2 initial={{ y: '100%' }} whileInView={{ y: '0%' }} transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }} viewport={{ once: true }} className="font-display font-bold text-[5vw]" style={{ color: 'var(--fg)' }}>
-            Selected Work
+            Featured Projects
           </motion.h2>
         </div>
       </div>
 
       <div className="flex flex-col relative border-t" style={{ borderColor: 'var(--border)' }}>
+        <PaperPlanePath />
         {projects.map((project, i) => (
           <ProjectRow key={project.number} project={project} index={i} />
         ))}
@@ -153,6 +157,15 @@ function ProjectRow({ project, index }: { project: typeof projects[0]; index: nu
                 style={{ borderColor: 'var(--border)', color: 'var(--fg)', borderRadius: '2px', cursor: project.github ? 'pointer' : 'not-allowed' }}>
                 GitHub →
               </a>
+
+              {/* @ts-ignore - optional property */ project.pypi && (
+                <a href={project.pypi} target="_blank" rel="noreferrer"
+                  {...linkCursor}
+                  className="px-6 py-3 border font-body text-sm font-bold transition-colors hover:bg-white hover:text-black flex items-center justify-center whitespace-nowrap"
+                  style={{ borderColor: 'var(--border)', color: 'var(--fg)', borderRadius: '2px', cursor: 'pointer' }}>
+                  PyPI ↗
+                </a>
+              )}
 
               <button 
                 {...linkCursor}

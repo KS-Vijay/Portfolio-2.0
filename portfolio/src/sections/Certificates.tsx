@@ -8,14 +8,17 @@ const certs = [
   { title: "Digital Systems: Logic to Processors", issuer: "UAB Coursera", date: "Sept’ 24", link: "https://www.coursera.org/account/accomplishments/verify/YADAX2CCCF3N" }
 ]
 
+import AmbientShapes from '@/components/ui/AmbientShapes'
+
 export default function Certificates() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const cursor = useCursorHover('hover')
 
   return (
-    <section id="certificates" ref={ref} className="py-32 border-t relative z-10" style={{ background: 'var(--bg)', borderColor: 'var(--border)' }}>
-      <div className="px-6 md:px-20 max-w-7xl mx-auto">
+    <section id="certificates" ref={ref} className="py-32 border-t relative z-10 overflow-hidden" style={{ background: 'var(--bg)', borderColor: 'var(--border)' }}>
+      <AmbientShapes />
+      <div className="px-6 md:px-20 max-w-7xl mx-auto relative z-10">
         <motion.span initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}
           className="font-mono text-xs tracking-widest mb-4 block" style={{ color: 'var(--accent)' }}>
           06 / CREDENTIALS

@@ -13,7 +13,7 @@ export default function Contact() {
   const ambientY = useTransform(scrollYProgress, [0, 1], ['-5%', '5%'])
   const [copied, setCopied] = useState(false)
   const [sent, setSent] = useState(false)
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm()
+  const { register, handleSubmit, reset, formState: { isSubmitting } } = useForm()
 
   const cursorOpts = useCursorHover('hover')
 
@@ -32,6 +32,8 @@ export default function Contact() {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       setSent(true)
+      reset()
+      setTimeout(() => setSent(false), 5000)
     } catch (error) {
       console.error('Failed to send email:', error)
     }
@@ -124,13 +126,13 @@ export default function Contact() {
             { name: 'name', label: 'Name', type: 'text' },
             { name: 'email', label: 'Email', type: 'email' },
           ].map(({ name, label, type }) => (
-            <div key={name} className="relative group">
-              <input {...register(name, { required: true })} type={type} placeholder=" "
-                className="peer w-full bg-transparent border-b pb-2 pt-4 font-body text-base outline-none transition-colors"
+            <div key={name} className="relative group pt-5">
+              <input {...register(name, { required: true })} required type={type} placeholder=" "
+                className="peer w-full bg-transparent border-b pb-2 pt-2 font-body text-base outline-none transition-colors"
                 style={{ borderColor: 'var(--border)', color: 'var(--fg)' }} />
-              <label className="absolute left-0 top-4 font-body text-sm transition-all
-                peer-focus:top-0 peer-focus:text-xs peer-placeholder-shown:top-4
-                peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-xs"
+              <label className="absolute left-0 top-7 font-body text-sm transition-all
+                peer-focus:top-0 peer-focus:text-xs peer-placeholder-shown:top-7
+                peer-valid:top-0 peer-valid:text-xs"
                 style={{ color: 'var(--fg-muted)' }}>
                 {label}
               </label>
@@ -139,13 +141,13 @@ export default function Contact() {
             </div>
           ))}
 
-          <div className="relative group">
-            <textarea {...register('message', { required: true })} rows={4} placeholder=" "
-              className="peer w-full bg-transparent border-b pb-2 pt-4 font-body text-base outline-none resize-none transition-colors"
+          <div className="relative group pt-5">
+            <textarea {...register('message', { required: true })} required rows={4} placeholder=" "
+              className="peer w-full bg-transparent border-b pb-2 pt-2 font-body text-base outline-none resize-none transition-colors"
               style={{ borderColor: 'var(--border)', color: 'var(--fg)' }} />
-            <label className="absolute left-0 top-4 font-body text-sm transition-all
-              peer-focus:top-0 peer-focus:text-xs peer-placeholder-shown:top-4
-              peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-xs"
+            <label className="absolute left-0 top-7 font-body text-sm transition-all
+              peer-focus:top-0 peer-focus:text-xs peer-placeholder-shown:top-7
+              peer-valid:top-0 peer-valid:text-xs"
               style={{ color: 'var(--fg-muted)' }}>
               Message
             </label>

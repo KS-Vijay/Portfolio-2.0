@@ -20,13 +20,16 @@ const marqueeItems = [
   'Data Science', 'Docker', 'AWS', 'Reinforcement Learning', 'Cloud Computing'
 ]
 
+import AmbientShapes from '@/components/ui/AmbientShapes'
+
 export default function Skills() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section id="skills" ref={ref} className="py-40 overflow-hidden" style={{ background: 'var(--bg-3)', backgroundColor: '#050505' }}>
-      <div className="px-6 md:px-20 max-w-7xl mx-auto">
+    <section id="skills" ref={ref} className="py-40 overflow-hidden relative" style={{ background: 'var(--bg-3)', backgroundColor: '#050505' }}>
+      <AmbientShapes />
+      <div className="px-6 md:px-20 max-w-7xl mx-auto relative z-10">
 
         <motion.span initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}
           className="font-mono text-xs tracking-widest mb-4 block" style={{ color: 'var(--accent)' }}>
